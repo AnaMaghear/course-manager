@@ -1,0 +1,48 @@
+<div
+  class="container d-flex justify-content-center flex-column align-items-center"
+>
+  <table class="table align-middle">
+    <thead>
+      <tr>
+        <th scope="col" class="text-center">Course</th>
+        <th scope="col" class="text-center">Teacher</th>
+        <th scope="col" class="text-center">Class Occupancy</th>
+        <th scope="col" class="text-center">Delete</th>
+        <th scope="col" class="text-center">Add student</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let course of filteredCourses" scope="row">
+        <td class="text-center">{{ course.name }}</td>
+        <td class="text-center">{{ course.teacher }}</td>
+        <td class="text-center">
+          <app-progress-bar
+            [maxNoOfStudents]="course.maxNoOfStudents"
+            [noOfStudents]="course.students.length"
+          ></app-progress-bar>
+        </td>
+        <td class="text-center">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onDelete(course.name)"
+          >
+            Delete
+          </button>
+        </td>
+        <td class="text-center">
+          <button
+            type="button"
+            class="btn btn-warning"
+            (click)="onAddStudent(course.name)"
+            [disabled]="course.maxNoOfStudents <= course.students.length"
+          >
+            Add student
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <app-search (filterEmitter)="onFilter($event)"></app-search>
+</div>

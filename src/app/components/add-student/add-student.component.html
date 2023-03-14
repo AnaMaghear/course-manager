@@ -1,0 +1,21 @@
+<div
+  class="container d-flex flex-column w-100 h-100 justify-content-center align-items-center"
+>
+  <form [formGroup]="addStudentForm" (ngSubmit)="onSubmit()">
+    <label class="mb-2 fs-3" for="studentName">Student name:</label>
+    <input
+      type="text"
+      id="studentName"
+      formControlName="studentName"
+      class="form-control"
+      #stud
+    />
+    <button
+      type="submit"
+      class="btn btn-success mt-2"
+      [disabled]="stud.value === ''"
+    >
+      Add
+    </button>
+  </form>
+</div>
